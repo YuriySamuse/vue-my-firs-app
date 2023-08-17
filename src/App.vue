@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div :id="$style.app">
     <h1>{{ title }}</h1>
-    <Button @click="increment">Cleck me</Button>
+    <Button @click="increment">Click me</Button>
   </div>
   
   
@@ -9,12 +9,13 @@
 
 <script>
 
-import Button from './components/Button.vue'
+// import Button from './components/Button.vue'
+import Button from "./components/Button.vue";
 
 export default {
   name: 'App',
   components: {
-        Button,
+    Button,
   },
   data() {
     return {
@@ -34,7 +35,7 @@ export default {
 }
 </script>
 
-<style>
+<style module>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
