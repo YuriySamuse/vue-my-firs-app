@@ -1,5 +1,5 @@
 <template>
-    <button      v-bind:type="type" :class="{ btn: true, 'btn--outlined': outlined }">
+    <button :type="type" :class="{ 'btn--outlined': outlined }" class="btn">
         <slot></slot>
     </button>
 </template>
@@ -12,13 +12,12 @@
                 type: String,
                 default: 'button'
             },
-              outlined: {
-            type: Boolean,
-            default: true
-        }          
+            outlined: {
+                type: Boolean,
+                default: false
+            }          
         },
 
-      
     }
 </script>
 

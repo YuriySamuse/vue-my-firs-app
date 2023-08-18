@@ -2,6 +2,8 @@
   <div :id="$style.app">
     <h1>{{ title }}</h1>
     <Button @click="increment">Click me</Button>
+    <DirectivesTest />
+    <StarRating />
   </div>
   
   
@@ -9,13 +11,16 @@
 
 <script>
 
-// import Button from './components/Button.vue'
+import DirectivesTest  from './components/DirectivesTest'
 import Button from "./components/Button.vue";
+import StarRating from './components/StarRating.vue';
 
 export default {
   name: 'App',
   components: {
     Button,
+    DirectivesTest,
+    StarRating
   },
   data() {
     return {
