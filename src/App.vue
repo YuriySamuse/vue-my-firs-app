@@ -1,34 +1,35 @@
 <template>
   <div :id="$style.app">
-    <h1>{{ title }}</h1>    
-    <StarRating :rating="4" />
+    <ApartmentsItem :rating="apartment.rating" :descr="apartment.descr" :price="apartment.price"
+      imgSrc="https://grandstail.ru/assets/cache/Pic/user/images/noimage.jpg/05cc9918f9e7391e26ac979e8560f6a1.jpg" />
   </div>
-  
-  
 </template>
 
 <script>
-
-import StarRating from './components/StarRating.vue';
+import ApartmentsItem from './components/apartment/ApartmentsItem'
 
 export default {
   name: 'App',
-  components: {    
-    StarRating
+  components: {
+    ApartmentsItem
   },
   data() {
     return {
-      amountOfClicks: 0
-    }
-  },
-  computed: {
-    title() {
-      return `Amount of clicks: ${this.amountOfClicks}`
-    }
-  },
-  methods: {
-    increment() {
-      this.amountOfClicks += 1
+      apartment: {
+        id: "ljhbslhafbljHSBF;KJB",
+        title: "lorem nskjnkjadnlk",
+        descr: "Роскошные апартаменты в скайндинавском стиле с панорамным видом на реку и бесплатным Wi-Fi.",
+        price: 2032,
+        rating: 4.7,
+        location: {
+          city: "Sassnitz"
+        },
+        owner: {
+          name: "Ellen",
+          phone: "1234654",
+          email: "ownermail@post.com"
+        }
+      }
     }
   },
 }
@@ -36,7 +37,7 @@ export default {
 
 <style module>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
