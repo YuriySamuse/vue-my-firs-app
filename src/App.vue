@@ -1,20 +1,21 @@
 <template>
   <div :id="$style.app">
-    <ApartmentsItem :rating="apartment.rating" :descr="apartment.descr" :price="apartment.price"
-      imgSrc="https://grandstail.ru/assets/cache/Pic/user/images/noimage.jpg/05cc9918f9e7391e26ac979e8560f6a1.jpg" />
+    <ApartmentsList :items="apartments" />
   </div>
 </template>
 
 <script>
-import ApartmentsItem from './components/apartment/ApartmentsItem'
+import ApartmentsList from './components/apartment/ApertmentsList.vue'
+import apartments from './components/apartment/apartments'
 
 export default {
   name: 'App',
   components: {
-    ApartmentsItem
+    ApartmentsList
   },
   data() {
     return {
+      apartments,
       apartment: {
         id: "ljhbslhafbljHSBF;KJB",
         title: "lorem nskjnkjadnlk",
