@@ -10,6 +10,7 @@
                     <StarRating :rating="rating" />
                 </div>
                 <div class="apartments-item__price">UAH {{ price }}</div>
+                <a href="https://facebook.com" @click.prevent.stop="handleLinkClick">facebook</a>
             </div>
         </div>
     </div>
@@ -40,6 +41,15 @@ export default {
         imgSrc: {
             type: String,
             default: ''
+        }
+    },
+    methods: {
+        log(index, event) {
+            console.log(index);
+            console.log(event);
+        },
+        handleLinkClick() {
+            console.log('facebook clicked');
         }
     }
 }

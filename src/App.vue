@@ -1,38 +1,36 @@
 <template>
   <div :id="$style.app">
-    <ApartmentsList :items="apartments" />
+    <ApartmentsList :items="apartments">
+      <template v-slot:title>New Title</template>
+      <template v-slot:apartment="{ apartment }">
+        <ApartmentsItem :key="apartment.id" :descr="apartment.descr" :rating="apartment.rating" :imgSrc="apartment.imgUrl"
+          :price="apartment.price" @click="handleItemClick" />
+      </template>
+    </ApartmentsList>
   </div>
 </template>
 
 <script>
 import ApartmentsList from './components/apartment/ApertmentsList.vue'
+import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import apartments from './components/apartment/apartments'
 
 export default {
   name: 'App',
   components: {
-    ApartmentsList
+    ApartmentsList,
+    ApartmentsItem
   },
   data() {
     return {
       apartments,
-      apartment: {
-        id: "ljhbslhafbljHSBF;KJB",
-        title: "lorem nskjnkjadnlk",
-        descr: "Роскошные апартаменты в скайндинавском стиле с панорамным видом на реку и бесплатным Wi-Fi.",
-        price: 2032,
-        rating: 4.7,
-        location: {
-          city: "Sassnitz"
-        },
-        owner: {
-          name: "Ellen",
-          phone: "1234654",
-          email: "ownermail@post.com"
-        }
-      }
     }
   },
+  methods: {
+    handleItemClick() {
+      console.log('item click');
+    }
+  }
 }
 </script>
 
