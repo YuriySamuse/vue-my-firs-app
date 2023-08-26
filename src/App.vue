@@ -1,6 +1,7 @@
 <template>
   <div :id="$style.app">
     <h2>Input: {{ text }}</h2>
+    <CustomSelect :items="['name', 'label', 'salary']" />
     <CastomInput :modelValue="text" @update:modelValue="text = $event" />
     <ApartmentsList :items="apartments">
       <template v-slot:title>New Title</template>
@@ -17,13 +18,15 @@ import ApartmentsList from './components/apartment/ApertmentsList.vue'
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import apartments from './components/apartment/apartments'
 import CastomInput from './components/shared/CustomInput'
+import CustomSelect from './components/shared/CustomSelect'
 
 export default {
   name: 'App',
   components: {
     ApartmentsList,
     ApartmentsItem,
-    CastomInput
+    CastomInput,
+    CustomSelect
   },
   data() {
     return {
