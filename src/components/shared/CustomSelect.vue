@@ -1,6 +1,6 @@
 <template>
     <select v-on:input="inputlisteners" class="custom-select">
-        <option v-for="item in formatedItems" :key="item.value" :value="item.value">
+        <option v-for="item in formatedItems" :key="item.value" :value="item.value" :selected="item.selected">
             {{ item.label }}</option>
     </select>
 </template>
@@ -36,11 +36,14 @@ export default {
 
 .custom-select {
     height: 40px;
+    max-width: 220px;
+    width: 100%;
     border: 2px solid $main-color;
     font-size: 18px;
     outline: none;
     padding: 8px 15px;
     cursor: pointer;
     display: inline-block;
+
 }
 </style>

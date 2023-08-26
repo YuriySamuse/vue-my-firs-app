@@ -1,10 +1,12 @@
 <template>
-  <div :id="$style.app">
+  <div id="app">
     <h2>Input: {{ text }}</h2>
-    <CustomSelect :items="['name', 'label', 'salary']" />
-    <CastomInput :modelValue="text" @update:modelValue="text = $event" />
+    <Container>
+      <ApartmentsFilterForm class="apartment-filter" @submit="logger" />
+
+    </Container>
     <ApartmentsList :items="apartments">
-      <template v-slot:title>New Title</template>
+      <!-- <template v-slot:title>New Title</template> -->
       <template v-slot:apartment="{ apartment }">
         <ApartmentsItem :key="apartment.id" :descr="apartment.descr" :rating="apartment.rating" :imgSrc="apartment.imgUrl"
           :price="apartment.price" @click="handleItemClick" />
@@ -17,16 +19,16 @@
 import ApartmentsList from './components/apartment/ApertmentsList.vue'
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import apartments from './components/apartment/apartments'
-import CastomInput from './components/shared/CustomInput'
-import CustomSelect from './components/shared/CustomSelect'
+import ApartmentsFilterForm from './components/apartment/ApartmentFilterForm.vue'
+import Container from './components/shared/Container.vue'
 
 export default {
   name: 'App',
   components: {
     ApartmentsList,
     ApartmentsItem,
-    CastomInput,
-    CustomSelect
+    ApartmentsFilterForm,
+    Container
   },
   data() {
     return {
@@ -37,12 +39,16 @@ export default {
   methods: {
     handleItemClick() {
       console.log('item click');
-    }
+    },
+    logger(value) {
+      console.log(value, '----form value');
+    },
+
   }
 }
 </script>
 
-<style module>
+<style lang="scss" scoped>
 #app {
   font-family: Montserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -50,5 +56,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.apartment-filter {
+  margin-bottom: 40px;
 }
 </style>
