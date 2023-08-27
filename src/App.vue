@@ -1,26 +1,25 @@
 <template>
   <div id="app">
-    <h2>Input: {{ text }}</h2>
+    <h2>{{ text }}</h2>
     <Container>
-      <ApartmentsFilterForm class="apartment-filter" @submit="logger" />
-
+      <ApartmentsFilterForm class="apartments-filter" @apartmentFilter="filter" />
     </Container>
-    <ApartmentsList :items="apartments">
-      <!-- <template v-slot:title>New Title</template> -->
+    <p v-if="!filteredApartments.length">Ничего не найдено</p>
+    <ApartmentsList v-else :items="filteredApartments">
       <template v-slot:apartment="{ apartment }">
         <ApartmentsItem :key="apartment.id" :descr="apartment.descr" :rating="apartment.rating" :imgSrc="apartment.imgUrl"
-          :price="apartment.price" @click="handleItemClick" />
+          :price="apartment.price" />
       </template>
     </ApartmentsList>
   </div>
 </template>
 
 <script>
-import ApartmentsList from './components/apartment/ApertmentsList.vue'
-import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
+import ApartmentsList from './components/apartment/ApartmentsList'
+import ApartmentsItem from './components/apartment/ApartmentsItem'
 import apartments from './components/apartment/apartments'
-import ApartmentsFilterForm from './components/apartment/ApartmentFilterForm.vue'
-import Container from './components/shared/Container.vue'
+import ApartmentsFilterForm from './components/apartment/ApartmentFilterForm'
+import Container from './components/shared/Container'
 
 export default {
   name: 'App',
@@ -34,16 +33,55 @@ export default {
     return {
       text: '',
       apartments,
+      filters: {
+        city: '',
+        price: 0
+      }
+    }
+  },
+  computed: {
+    filteredApartments() {
+      // return this.filterByCityName(this.filterByPrice(this.apartments))
+      return this.apartments.filter(apartment => {
+        return this.isValidCity(apartment)
+          && this.isValidPrice(apartment)
+      })
     }
   },
   methods: {
-    handleItemClick() {
-      console.log('item click');
+    isValidCity(apartment) {
+      if (!this.filters.city) {
+        return true
+      }
+      return apartment.location.city === this.filters.city
     },
-    logger(value) {
-      console.log(value, '----form value');
+    isValidPrice(apartment) {
+      if (!this.filters.price) {
+        return true
+      }
+      return apartment.price >= this.filters.price
     },
+    filter({ city, price }) {
+      // console.log(price, city, this.filters, ...arguments);
+      this.filters.city = city
+      this.filters.price = price
+    },
+    // filterByCityName(apartments) {
+    //   if (!this.filters.city) return apartments
 
+    //   return apartments.filter(apartment => {
+    //     return apartment.location.city === this.filters.city
+    //   })
+    // },
+    // filterByPrice(apartments) {
+    //   if (!this.filters.price) return apartments
+
+    //   return apartments.filter(apartment => {
+    //     // console.log(this.filters.price);
+
+    //     return apartment.price >= this.filters.price
+    //   })
+    // }
   }
 }
 </script>
@@ -58,7 +96,7 @@ export default {
   margin-top: 60px;
 }
 
-.apartment-filter {
+.apartments-filter {
   margin-bottom: 40px;
 }
 </style>

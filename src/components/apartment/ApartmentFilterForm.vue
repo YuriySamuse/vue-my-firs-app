@@ -30,7 +30,7 @@ export default {
     },
     methods: {
         handleSubmit() {
-            this.$emit('submit', {
+            this.$emit('apartmentFilter', {
                 city: this.city,
                 price: this.price
             })
